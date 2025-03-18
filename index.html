@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Federizo Resume</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" type="image/x-icon" href="neon-planet.png" />
+    <style>
+      :root {
+        --neon-pink: #ff00ff;
+        --neon-blue: #00ffff;
+        --neon-green: #39ff14;
+        --neon-purple: #bc13fe;
+        --dark-bg: #0a0a0a;
+        --darker-bg: #050505;
+      }
+
+      body {
+        background-color: var(--dark-bg);
+        color: #ffffff;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .neon-container {
+        border: 2px solid var(--neon-blue);
+        box-shadow: 0 0 15px var(--neon-blue), inset 0 0 15px var(--neon-blue);
+        padding: 30px;
+        border-radius: 10px;
+        background-color: var(--darker-bg);
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+
+      .neon-text-pink {
+        color: var(--neon-pink);
+        text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink);
+      }
+
+      .neon-text-blue {
+        color: var(--neon-blue);
+        text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+      }
+
+      .neon-text-green {
+        color: var(--neon-green);
+        text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green);
+      }
+
+      .neon-text-purple {
+        color: var(--neon-purple);
+        text-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple);
+      }
+
+      .section-title {
+        border-bottom: 1px solid var(--neon-green);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+
+      .skill-tag {
+        display: inline-block;
+        padding: 5px 15px;
+        margin: 5px;
+        border-radius: 20px;
+        background-color: var(--darker-bg);
+        border: 1px solid var(--neon-purple);
+        color: var(--neon-purple);
+        box-shadow: 0 0 5px var(--neon-purple);
+        transition: all 0.3s ease;
+      }
+
+      .skill-tag:hover {
+        box-shadow: 0 0 15px var(--neon-purple),
+          inset 0 0 10px var(--neon-purple);
+        transform: translateY(-2px);
+      }
+
+      .job-card {
+        border-left: 3px solid var(--neon-pink);
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: rgba(255, 0, 255, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .job-card:hover {
+        box-shadow: 0 0 15px var(--neon-pink);
+        transform: translateX(5px);
+      }
+
+      .project-card {
+        border: 1px solid var(--neon-blue);
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: rgba(0, 255, 255, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .project-card:hover {
+        box-shadow: 0 0 15px var(--neon-blue);
+        transform: translateY(-5px);
+      }
+
+      .contact-icon {
+        font-size: 24px;
+        margin-right: 10px;
+        color: var(--neon-green);
+        transition: all 0.3s ease;
+      }
+
+      .contact-icon:hover {
+        text-shadow: 0 0 10px var(--neon-green);
+        transform: scale(1.2);
+      }
+
+      a {
+        color: var(--neon-blue);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      a:hover {
+        color: var(--neon-green);
+        text-shadow: 0 0 5px var(--neon-green);
+      }
+
+      .profile-img {
+        border: 3px solid var(--neon-purple);
+        box-shadow: 0 0 15px var(--neon-purple);
+      }
+      .personal-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .personal-info-item {
+        display: flex;
+        align-items: baseline;
+      }
+
+      .personal-info-label {
+        color: var(--neon-pink);
+        min-width: 110px;
+        font-weight: 500;
+        margin-right: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .personal-info {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Optional: different animations for different directions */
+      .reveal-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s ease;
+      }
+
+      .reveal-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s ease;
+      }
+
+      .reveal-left.active,
+      .reveal-right.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container neon-container">
+      <!-- Header Section -->
+      <header class="text-center mb-5">
+        <div class="row align-items-center">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <img
+              src="profile.jpg"
+              alt="Profile"
+              class="img-fluid rounded-circle profile-img"
+            />
+          </div>
+          <div class="col-md-8">
+            <h1 class="display-4 neon-text-blue">John Patrick Federizo</h1>
+            <p class="lead neon-text-pink">Web and Game Developer</p>
+            <div class="mt-3">
+              <a href="mailto:federizojohnpatrick420@gmail.com" class="me-3">
+                <i class="contact-icon"
+                  ><img src="gmail.png" alt="gmail" width="24" height="24"
+                /></i>
+                federizojohnpatrick420@gmail.com
+              </a>
+              <a href="tel:09291061078" class="me-3">
+                <i class="contact-icon"
+                  ><img
+                    src="phone-call.png"
+                    alt="contact-icon"
+                    width="24"
+                    height="24"
+                /></i>
+                09291061078
+              </a>
+              <a
+                href="https://www.facebook.com/stephen.irving.75098"
+                class="me-3"
+              >
+                <i class="contact-icon"
+                  ><img
+                    src="facebook.png"
+                    alt="facebook"
+                    width="24"
+                    height="24"
+                /></i>
+                JOHN PATRICK FEDERIZO
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- About Section -->
+      <section class="mb-5 reveal">
+        <h2 class="section-title neon-text-green">PERSONAL INFORMATION</h2>
+        <div class="personal-info">
+          <div class="personal-info-item">
+            <span class="personal-info-label">Birthday:</span>
+            <span>August 2, 2023</span>
+          </div>
+          <div class="personal-info-item">
+            <span class="personal-info-label">Age:</span>
+            <span>21 years</span>
+          </div>
+          <div class="personal-info-item">
+            <span class="personal-info-label">Place of Birth:</span>
+            <span>San Pablo City, Laguna</span>
+          </div>
+          <div class="personal-info-item">
+            <span class="personal-info-label">Height:</span>
+            <span>5'11"</span>
+          </div>
+          <div class="personal-info-item">
+            <span class="personal-info-label">Civil Status:</span>
+            <span>Single</span>
+          </div>
+          <div class="personal-info-item">
+            <span class="personal-info-label">Weight:</span>
+            <span>60kg</span>
+          </div>
+          <div class="personal-info-item">
+            <span class="personal-info-label">Address:</span>
+            <span>San Jose San Pablo City, Laguna</span>
+          </div>
+          <div class="personal-info-item">
+            <span class="personal-info-label">Religion:</span>
+            <span>Catholic</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <p>
+            I am a freelance developer specializing in web and mobile
+            applications.
+          </p>
+        </div>
+      </section>
+
+      <!-- Education Section -->
+      <section class="mb-5 reveal">
+        <h2 class="section-title neon-text-green">EDUCATION</h2>
+
+        <div class="job-card">
+          <div class="d-flex justify-content-between mb-2">
+            <h4 class="neon-text-pink">
+              Bachelor of Science in Computer Science
+            </h4>
+            <span class="neon-text-blue">Present</span>
+          </div>
+          <h5>Pamantasan ng Lungsod ng San Pablo</h5>
+          <p>San Pablo City, Laguna</p>
+        </div>
+
+        <div class="job-card">
+          <div class="d-flex justify-content-between mb-2">
+            <h4 class="neon-text-pink">General Academic Strand</h4>
+            <span class="neon-text-blue">2021</span>
+          </div>
+          <h5>Felix Amante Senior High School</h5>
+          <p>San Jose San Pablo City, Laguna</p>
+        </div>
+
+        <div class="job-card">
+          <div class="d-flex justify-content-between mb-2">
+            <h4 class="neon-text-pink">High School</h4>
+            <span class="neon-text-blue">2019</span>
+          </div>
+          <h5>San Jose National High School</h5>
+          <p>San Jose San Pablo City, Laguna</p>
+        </div>
+
+        <div class="job-card">
+          <div class="d-flex justify-content-between mb-2">
+            <h4 class="neon-text-pink">Elementary School</h4>
+            <span class="neon-text-blue">2014</span>
+          </div>
+          <h5>San Jose Elementary School</h5>
+          <p>San Jose San Pablo City, Laguna</p>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section class="mb-5 reveal">
+        <h2 class="section-title neon-text-green">Key Competencies</h2>
+        <div class="text-center">
+          <span class="skill-tag">Good Communication</span>
+          <span class="skill-tag">Basic Programming</span>
+          <span class="skill-tag">Problem Solving</span>
+          <span class="skill-tag">Strong Personality</span>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <!--<section class="mb-5 reveal">
+        <h2 class="section-title neon-text-green">EXPERIENCE</h2>
+
+        <div class="job-card">
+          <div class="d-flex justify-content-between mb-2">
+            <h4 class="neon-text-pink">Web Developer</h4>
+            <span class="neon-text-blue">2021 - Present</span>
+          </div>
+          <h5>ABC Company</h5>
+          <ul>
+            <li>
+              Collaborated with designers to transform creative concepts into
+              functional websites
+            </li>
+            <li>Mentored junior developers and conducted code reviews</li>
+          </ul>
+        </div>
+      </section>
+    -->
+
+      <!-- Contact Section -->
+      <section class="reveal">
+        <h2 class="section-title neon-text-green">GET IN TOUCH</h2>
+        <div class="text-center">
+          <p class="mb-4">
+            Interested in working together? Feel free to reach out!
+          </p>
+          <a
+            href="mailto:federizojohnpatrick420@gmail.com"
+            class="btn btn-outline-light me-3 mb-3"
+          >
+            <i class="contact-icon"
+              ><img src="gmail.png" alt="gmail" width="24" height="24"
+            /></i>
+            Email Me
+          </a>
+          <a href="tel:09291061078" class="btn btn-outline-light me-3 mb-3">
+            <i class="contact-icon"
+              ><img src="phone-call.png" alt="Call Me" width="24" height="24"
+            /></i>
+            Call Me
+          </a>
+          <a
+            href="https://www.facebook.com/stephen.irving.75098"
+            class="btn btn-outline-light mb-3"
+          >
+            <i class="contact-icon"
+              ><img
+                src="facebook.png"
+                alt="Facebook"
+                width="24"
+                height="24" /></i
+            >Message Me
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Reveal elements on scroll
+      function reveal() {
+        var reveals = document.querySelectorAll(
+          ".reveal, .reveal-left, .reveal-right"
+        );
+
+        for (var i = 0; i < reveals.length; i++) {
+          var windowHeight = window.innerHeight;
+          var elementTop = reveals[i].getBoundingClientRect().top;
+          var elementVisible = 150; // Adjust this to change when elements become visible
+
+          if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+          } else {
+            reveals[i].classList.remove("active");
+          }
+        }
+      }
+
+      window.addEventListener("scroll", reveal);
+
+      // To check on page load
+      reveal();
+    </script>
+  </body>
+</html>
